@@ -1,3 +1,4 @@
+import HomeFilters from "@/components/home/HomeFilters";
 import Filter from "@/components/shared/Filter";
 import LocalSearch from "@/components/shared/search/LocalSearch";
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,7 @@ export default function Home() {
           containerClasses="hidden max-md:flex"
         />
       </div>
+      <HomeFilters />
     </>
   );
 }
