@@ -1,7 +1,7 @@
 import Link from "next/link";
 import RenderTag from "../shared/RenderTag";
 import Metric from "../shared/Metric";
-import { getTimestamp } from "@/lib/utils";
+import { formatNumber, getTimestamp } from "@/lib/utils";
 
 interface Props {
   _id: string;
@@ -58,7 +58,7 @@ const QuestionCard = ({
           imgUrl="/assets/icons/avatar.svg"
           alt="user"
           value={author.name}
-          title="- asked 1 hour ago"
+          title={` - asked ${getTimestamp(createdAt)}`}
           href={`/profile/${author._id}`}
           isAuthor
           textStyles="body-medium test-dark400_light700"
@@ -66,21 +66,21 @@ const QuestionCard = ({
         <Metric
           imgUrl="/assets/icons/like.svg"
           alt="upvotes"
-          value={upvotes}
+          value={formatNumber(upvotes)}
           title="Votes"
           textStyles="small-medium test-dark400_light800"
         />
         <Metric
           imgUrl="/assets/icons/message.svg"
           alt="message"
-          value={answers.length}
+          value={formatNumber(answers.length)}
           title="Answers"
           textStyles="small-medium test-dark400_light800"
         />
         <Metric
           imgUrl="/assets/icons/eye.svg"
           alt="eye"
-          value={views}
+          value={formatNumber(views)}
           title="Views"
           textStyles="small-medium test-dark400_light800"
         />
