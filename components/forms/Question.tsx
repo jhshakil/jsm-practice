@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import { QuestionsSchema } from "@/lib/validation";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
+import { createQuestion } from "@/lib/actions/question.action";
 
 const type: any = "create";
 
@@ -36,17 +37,16 @@ const Question = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof QuestionsSchema>) {
+  async function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     setIsSubmitting(true);
     try {
-        // make an async call to your api => create a question
-        // contain all form data
+      await createQuestion({});
+      // contain all form data
 
-        // navigate to home page
+      // navigate to home page
     } catch (error) {
-        
     } finally {
-        setIsSubmitting(false)
+      setIsSubmitting(false);
     }
   }
 
@@ -128,6 +128,8 @@ const Question = () => {
                       // @ts-ignore
                       editorRef.current = editor;
                     }}
+                    onBlur={field.onBlur}
+                    onEditorChange={(content) => field.onChange(content)}
                     initialValue=""
                     init={{
                       height: 350,
@@ -160,7 +162,7 @@ const Question = () => {
                 </FormControl>
                 <FormDescription className="body-regular mt-2.5 text-light-500">
                   Introduce the problem and expand on what you put in the title.
-                  minimum 20 characters
+                  minimum 100 characters
                 </FormDescription>
                 <FormMessage className="text-red-500" />
               </FormItem>
